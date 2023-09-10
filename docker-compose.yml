@@ -27,23 +27,21 @@ services:
   postgres:
       image: postgres:15.2
       restart: unless-stopped
+      volumes:
+          - ./infra/pgsql/init_db.sh:/docker-entrypoint-initdb.d/init_db.sh
       ports:
         - "5432:5432"
       networks:
         - bank-bridge
       environment:
-          POSTGRES_DATABASE: ${DB_PASSWORD}
-          POSTGRES_PASSWORD: ${DB_PASSWORD}
-          POSTGRES_USER: ${DB_USERNAME}
+        POSTGRES_PASSWORD: root
   postgres-tests:
       image: postgres:15.2
       restart: unless-stopped
       networks:
         - bank-bridge
       environment:
-          POSTGRES_DATABASE: ${DB_PASSWORD}
-          POSTGRES_PASSWORD: ${DB_PASSWORD}
-          POSTGRES_USER: ${DB_USERNAME}
+          POSTGRES_PASSWORD: root
   cache:
     image: redis:7
     networks:
