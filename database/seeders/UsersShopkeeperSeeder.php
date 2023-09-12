@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Shopkeeper;
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,7 @@ class UsersShopkeeperSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-            ->has(Shopkeeper::factory(), 'shopkeeper')
+            ->has(Shopkeeper::factory()->has(Wallet::factory()), 'shopkeeper')
             ->count(5)
             ->create();
     }

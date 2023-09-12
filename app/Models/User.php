@@ -9,6 +9,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property Shopkeeper $shopkeeper
+ * @property Natural $natural
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;

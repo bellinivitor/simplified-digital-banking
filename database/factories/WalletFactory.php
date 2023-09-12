@@ -20,4 +20,13 @@ class WalletFactory extends Factory
             'balance' => 0
         ];
     }
+
+    public function withBalance(float $amount): WalletFactory|Factory
+    {
+        return $this->state(fn(array $attributes) => [
+            'balance' => $amount
+        ]);
+    }
+
+
 }

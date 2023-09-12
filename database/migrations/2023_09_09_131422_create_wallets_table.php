@@ -21,8 +21,7 @@ return new class extends Migration
 
         });
 
-        // Adicione a restrição CHECK personalizada
-        DB::statement('ALTER TABLE wallets ADD CONSTRAINT pelo_menos_um_preenchido
+        DB::statement('ALTER TABLE wallets ADD CONSTRAINT parent_control_check
             CHECK ((natural_id IS NOT NULL AND shopkeeper_id IS NULL)
                        OR (natural_id IS NULL AND shopkeeper_id IS NOT NULL))');
     }
