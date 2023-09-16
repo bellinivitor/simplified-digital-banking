@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,6 @@ Route::prefix('/v1')->group(function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 });
+
+Route::get('/test', fn () => 'Ok')
+    ->withoutMiddleware(ThrottleRequests::class . ':api');
