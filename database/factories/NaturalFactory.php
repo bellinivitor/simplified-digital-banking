@@ -19,7 +19,7 @@ class NaturalFactory extends Factory
     {
         $faker = \Faker\Factory::create('pt_BR');
         return [
-            'cpf' => $faker->cpf
+            'cpf' => $faker->cpf(false)
         ];
     }
 }

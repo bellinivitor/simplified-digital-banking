@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use Domain\Shared\Exceptions\DuplicatedValueException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 

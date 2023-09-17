@@ -18,7 +18,7 @@ class ShopkeeperFactory extends Factory
     {
         $faker = \Faker\Factory::create('pt_BR');
         return [
-            'cnpj' => $faker->cnpj
+            'cnpj' => $faker->cnpj(false)
         ];
     }
 }

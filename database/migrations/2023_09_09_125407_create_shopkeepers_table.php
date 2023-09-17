@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('shopkeepers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->references('id')->on('users');
-            $table->string('cnpj', 18)->unique();
+            $table->string('cnpj', 15)->unique();
             $table->timestamps();
             $table->softDeletes();
         });
