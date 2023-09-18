@@ -24,7 +24,7 @@ test('Discount test on the amount transferred from a shopkeeper', function () {
 
     assertEquals(300, $wallet->balance);
 
-})->group('Unit', 'Wallet');
+})->group('Unit', 'Transfer');
 
 test('Discount test on the amount transferred from a shopkeeper without suficient balance', function () {
 
@@ -40,7 +40,7 @@ test('Discount test on the amount transferred from a shopkeeper without suficien
     $descountValueOfTransfer = resolve(DescountValueOfTransferAction::class);
     $descountValueOfTransfer($wallet, 600);
 
-})->group('Unit', 'Wallet')->throws(InsufficientBalanceException::class);
+})->group('Unit', 'Transfer')->throws(InsufficientBalanceException::class);
 
 test('Discount test on the amount transferred from a natural', function () {
 
@@ -58,7 +58,7 @@ test('Discount test on the amount transferred from a natural', function () {
 
     assertEquals(300, $wallet->balance);
 
-})->group('Unit', 'Wallet');
+})->group('Unit', 'Transfer');
 
 test('Discount test on the amount transferred from a natural without suficient balance', function () {
 
@@ -74,4 +74,4 @@ test('Discount test on the amount transferred from a natural without suficient b
     $descountValueOfTransfer = resolve(DescountValueOfTransferAction::class);
     $descountValueOfTransfer($wallet, 600);
 
-})->group('Unit', 'Wallet')->throws(InsufficientBalanceException::class);
+})->group('Unit', 'Transfer')->throws(InsufficientBalanceException::class);

@@ -2,8 +2,10 @@
 
 namespace Domain\Transfers\Actions;
 
+use App\Models\Shopkeeper;
 use Domain\Transfers\Exceptions\InsufficientBalanceException;
 use Domain\Transfers\Exceptions\InvalidTransferValueException;
+use Domain\Transfers\Exceptions\NotAllowedToTransferExeption;
 use Domain\Users\Interfaces\AccountHolderInterface;
 use Domain\Wallet\Actions\DescountValueOfTransferAction;
 use Domain\Wallet\Actions\ReceiveTransferAction;
@@ -27,9 +29,14 @@ readonly class TransferAction
      * @return float
      * @throws InsufficientBalanceException
      * @throws InvalidTransferValueException
+     * @throws NotAllowedToTransferExeption
      */
     public function __invoke(AccountHolderInterface $sender, AccountHolderInterface $recipient, float $amount): float
     {
+        if ($sender instanceof Shopkeeper) {
+            throw new NotAllowedToTransferExeption('Shopkeepers cannot make transfers');
+        }
+
         if ($amount <= 0) {
             throw  new InvalidTransferValueException(__('The amount must be greater than zero to make the transfer'));
         }

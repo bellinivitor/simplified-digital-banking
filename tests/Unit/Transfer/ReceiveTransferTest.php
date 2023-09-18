@@ -23,4 +23,4 @@ test('Validate value received on wallet of recipient', function () {
 
     assertEquals(600, $wallet->balance);
 
-})->group('Unit', 'Wallet');
+})->group('Unit', 'Transfer');
