@@ -6,7 +6,7 @@ services:
       dockerfile: ./infra/local/docker/Dockerfile
     volumes:
       - ./:/app
-      - ./docker/php/prod.ini:/usr/local/etc/php/conf.d/prod.ini
+      - ./infra/local/docker/php/dev.ini:/usr/local/etc/php/conf.d/dev.ini
     working_dir: /app
     depends_on:
       - postgres
