@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Identification;
 use App\Models\Natural;
 use App\Models\Shopkeeper;
 use App\Models\User;
@@ -11,10 +12,14 @@ use function PHPUnit\Framework\assertEquals;
 test('Validate shopkeeper cannot transfer', function () {
 
     $userShopkeeper = User::factory()
-        ->has(Shopkeeper::factory()->has(Wallet::factory()->withBalance(1000)))
+        ->has(Shopkeeper::factory()
+            ->for(Identification::factory())
+            ->has(Wallet::factory()->withBalance(1000)))
         ->create();
     $userNatural = User::factory()
-        ->has(Natural::factory()->has(Wallet::factory()))
+        ->has(Natural::factory()
+            ->for(Identification::factory())
+            ->has(Wallet::factory()))
         ->create();
 
     $trasnfer = resolve(TransferAction::class);
@@ -23,13 +28,17 @@ test('Validate shopkeeper cannot transfer', function () {
 })->group('Unit', 'Transfer')->throws(NotAllowedToTransferExeption::class);
 
 
-test('Validate Natural to Shoopkeeper', function () {
+test('Validate trasnfer Natural to Shoopkeeper', function () {
 
     $userNatural = User::factory()
-        ->has(Natural::factory()->has(Wallet::factory()->withBalance(1000)))
+        ->has(Natural::factory()
+            ->for(Identification::factory())
+            ->has(Wallet::factory()->withBalance(1000)))
         ->create();
     $userShopkeeper = User::factory()
-        ->has(Shopkeeper::factory()->has(Wallet::factory()))
+        ->has(Shopkeeper::factory()
+            ->has(Wallet::factory())
+            ->for(Identification::factory()))
         ->create();
 
     $trasnfer = resolve(TransferAction::class);
@@ -40,13 +49,18 @@ test('Validate Natural to Shoopkeeper', function () {
 })->group('Unit', 'Transfer');
 
 
-test('Validate Natural to Natural', function () {
+test('Validate trasnfer Natural to Natural', function () {
 
     $userNatural = User::factory()
-        ->has(Natural::factory()->has(Wallet::factory()->withBalance(1000)))
+        ->has(Natural::factory()
+            ->has(Wallet::factory()
+                ->withBalance(1000))
+            ->for(Identification::factory()))
         ->create();
     $userOtherNatural = User::factory()
-        ->has(Natural::factory()->has(Wallet::factory()))
+        ->has(Natural::factory()
+            ->for(Identification::factory())
+            ->has(Wallet::factory()))
         ->create();
 
     $trasnfer = resolve(TransferAction::class);

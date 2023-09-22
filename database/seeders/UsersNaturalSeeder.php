@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Identification;
 use App\Models\Natural;
 use App\Models\Shopkeeper;
 use App\Models\User;
@@ -17,7 +18,11 @@ class UsersNaturalSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-            ->has(Natural::factory()->has(Wallet::factory()), 'natural')
+            ->has(
+                Natural::factory()
+                    ->for(Identification::factory())
+                    ->has(Wallet::factory()),
+                'natural')
             ->count(5)
             ->create();
     }

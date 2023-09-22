@@ -17,7 +17,8 @@ class Shopkeeper extends Model implements AccountHolderInterface
 
     protected $fillable = [
         'user_id',
-        'cnpj'
+        'cnpj',
+        'identification_id',
     ];
 
     public function user(): BelongsTo
@@ -36,5 +37,10 @@ class Shopkeeper extends Model implements AccountHolderInterface
         $wallet = $this->hasOne(Wallet::class)->firstOrNew();
 
         return $wallet;
+    }
+
+    public function identification(): BelongsTo
+    {
+        return $this->belongsTo(Identification::class);
     }
 }

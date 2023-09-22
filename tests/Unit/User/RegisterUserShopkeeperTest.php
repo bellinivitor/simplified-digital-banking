@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Identification;
 use App\Models\Natural;
 use App\Models\Shopkeeper;
 use App\Models\User;
@@ -9,7 +10,8 @@ use function Pest\Laravel\assertDatabaseCount;
 test('Create user shopkeeper', function () {
 
     User::factory()
-        ->has(Shopkeeper::factory())
+        ->has(Shopkeeper::factory()
+            ->for(Identification::factory()))
         ->count(3)
         ->create();
 
@@ -20,9 +22,9 @@ test('Create user shopkeeper', function () {
 test('Create duplicated user shopkeeper', function () {
 
     User::factory()
-        ->has(Shopkeeper::factory()->state(fn (array $attributes) => [
+        ->has(Shopkeeper::factory()->state(fn(array $attributes) => [
             'cnpj' => '000000000000000',
-        ]))
+        ])->for(Identification::factory()))
         ->count(2)
         ->create();
 

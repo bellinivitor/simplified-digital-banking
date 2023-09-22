@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\Identification;
 use App\Models\Natural;
 use App\Models\User;
 use App\Models\Wallet;
-use Domain\Wallet\Actions\DescountValueOfTransferAction;
 use Domain\Wallet\Actions\ReceiveTransferAction;
 use function PHPUnit\Framework\assertEquals;
 
@@ -13,7 +13,7 @@ test('Validate value received on wallet of recipient', function () {
     $user = User::factory()
         ->has(Natural::factory()
             ->has(Wallet::factory()->withBalance(500))
-        )
+            ->for(Identification::factory()))
         ->create();
 
     $wallet = $user->natural->wallet;

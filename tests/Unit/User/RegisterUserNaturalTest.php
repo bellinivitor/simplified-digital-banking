@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Identification;
 use App\Models\Natural;
 use App\Models\User;
 use Domain\Shared\Exceptions\DuplicatedValueException;
@@ -10,7 +11,8 @@ use function Pest\Laravel\assertDatabaseCount;
 test('Create user natural', function () {
 
     User::factory()
-        ->has(Natural::factory())
+        ->has(Natural::factory()
+            ->for(Identification::factory()))
         ->count(3)
         ->create();
 
@@ -21,9 +23,9 @@ test('Create user natural', function () {
 test('Create duplicated user natural', function () {
 
     User::factory()
-        ->has(Natural::factory()->state(fn (array $attributes) => [
+        ->has(Natural::factory()->state(fn(array $attributes) => [
             'cpf' => '00000000000',
-        ]))
+        ])->for(Identification::factory()))
         ->count(2)
         ->create();
 

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Identification;
 use App\Models\Shopkeeper;
 use App\Models\User;
 use App\Models\Wallet;
@@ -16,7 +17,11 @@ class UsersShopkeeperSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-            ->has(Shopkeeper::factory()->has(Wallet::factory()), 'shopkeeper')
+            ->has(
+                Shopkeeper::factory()
+                    ->for(Identification::factory())
+                    ->has(Wallet::factory()),
+                'shopkeeper')
             ->count(5)
             ->create();
     }

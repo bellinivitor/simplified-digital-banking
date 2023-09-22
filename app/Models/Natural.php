@@ -17,7 +17,8 @@ class Natural extends Model implements AccountHolderInterface
 
     protected $fillable = [
         'user_id',
-        'cpf'
+        'cpf',
+        'identification_id',
     ];
 
     public function user(): BelongsTo
@@ -36,5 +37,10 @@ class Natural extends Model implements AccountHolderInterface
         $wallet = $this->hasOne(Wallet::class)->firstOrNew();
 
         return $wallet;
+    }
+
+    public function identification(): BelongsTo
+    {
+        return $this->belongsTo(Identification::class);
     }
 }

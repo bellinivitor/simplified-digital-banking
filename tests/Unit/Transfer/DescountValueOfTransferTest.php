@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Identification;
 use App\Models\Natural;
 use App\Models\Shopkeeper;
 use App\Models\User;
@@ -14,6 +15,7 @@ test('Discount test on the amount transferred from a shopkeeper', function () {
     $user = User::factory()
         ->has(Shopkeeper::factory()
             ->has(Wallet::factory()->withBalance(500))
+            ->for(Identification::factory())
         )
         ->create();
 
@@ -32,6 +34,7 @@ test('Discount test on the amount transferred from a shopkeeper without suficien
     $user = User::factory()
         ->has(Shopkeeper::factory()
             ->has(Wallet::factory()->withBalance(500))
+            ->for(Identification::factory())
         )
         ->create();
 
@@ -48,6 +51,7 @@ test('Discount test on the amount transferred from a natural', function () {
     $user = User::factory()
         ->has(Natural::factory()
             ->has(Wallet::factory()->withBalance(500))
+            ->for(Identification::factory())
         )
         ->create();
 
@@ -66,6 +70,7 @@ test('Discount test on the amount transferred from a natural without suficient b
     $user = User::factory()
         ->has(Natural::factory()
             ->has(Wallet::factory()->withBalance(500))
+            ->for(Identification::factory())
         )
         ->create();
 

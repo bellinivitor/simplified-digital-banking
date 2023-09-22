@@ -10,13 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('naturals', function (Blueprint $table) {
+        Schema::create('identifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->unique()->references('id')->on('users');
-            $table->foreignId('identification_id')->references('id')->on('identifications');
-            $table->string('cpf', 11)->unique();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -25,6 +21,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('naturals');
+        Schema::dropIfExists('indentifitions');
     }
 };
