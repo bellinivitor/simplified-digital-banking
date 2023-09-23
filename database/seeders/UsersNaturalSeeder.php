@@ -17,12 +17,8 @@ class UsersNaturalSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()
-            ->has(
-                Natural::factory()
-                    ->for(Identification::factory())
-                    ->has(Wallet::factory()),
-                'natural')
+        Natural::factory()
+            ->has(Wallet::factory())
             ->count(5)
             ->create();
     }

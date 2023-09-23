@@ -3,6 +3,7 @@
 namespace Domain\Transfers\Actions;
 
 use App\Models\Shopkeeper;
+use App\Models\User;
 use Domain\Transfers\Exceptions\InsufficientBalanceException;
 use Domain\Transfers\Exceptions\InvalidTransferValueException;
 use Domain\Transfers\Exceptions\NotAllowedToTransferExeption;
@@ -26,12 +27,13 @@ readonly class TransferAction
      * @param AccountHolderInterface $sender
      * @param AccountHolderInterface $recipient
      * @param float $amount
+     * @param User $user
      * @return float
      * @throws InsufficientBalanceException
      * @throws InvalidTransferValueException
      * @throws NotAllowedToTransferExeption
      */
-    public function __invoke(AccountHolderInterface $sender, AccountHolderInterface $recipient, float $amount): float
+    public function __invoke(AccountHolderInterface $sender, AccountHolderInterface $recipient, float $amount, User $user): float
     {
         if ($sender instanceof Shopkeeper) {
             throw new NotAllowedToTransferExeption('Shopkeepers cannot make transfers');

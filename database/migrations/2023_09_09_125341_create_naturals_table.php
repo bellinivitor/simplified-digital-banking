@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('naturals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->references('id')->on('users');
-            $table->foreignId('identification_id')->references('id')->on('identifications');
+            $table->foreignId('identification_id')->unique()->references('id')->on('identifications');
             $table->string('cpf', 11)->unique();
             $table->timestamps();
             $table->softDeletes();

@@ -17,8 +17,8 @@ class Shopkeeper extends Model implements AccountHolderInterface
 
     protected $fillable = [
         'user_id',
-        'cnpj',
         'identification_id',
+        'cnpj',
     ];
 
     public function user(): BelongsTo

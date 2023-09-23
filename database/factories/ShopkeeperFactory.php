@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Identification;
+use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +21,9 @@ class ShopkeeperFactory extends Factory
     {
         $faker = \Faker\Factory::create('pt_BR');
         return [
-            'cnpj' => $faker->cnpj(false)
+            'cnpj' => $faker->cnpj(false),
+            'identification_id' => Identification::factory(),
+            'user_id' => User::factory(),
         ];
     }
 }

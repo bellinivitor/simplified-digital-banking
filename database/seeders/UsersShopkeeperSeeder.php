@@ -16,12 +16,8 @@ class UsersShopkeeperSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()
-            ->has(
-                Shopkeeper::factory()
-                    ->for(Identification::factory())
-                    ->has(Wallet::factory()),
-                'shopkeeper')
+        Shopkeeper::factory()
+            ->has(Wallet::factory())
             ->count(5)
             ->create();
     }

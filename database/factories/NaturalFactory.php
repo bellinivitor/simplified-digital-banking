@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Identification;
+use App\Models\User;
 use Faker\Provider\Person;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +21,9 @@ class NaturalFactory extends Factory
     {
         $faker = \Faker\Factory::create('pt_BR');
         return [
-            'cpf' => $faker->cpf(false)
+            'cpf' => $faker->cpf(false),
+            'identification_id' => Identification::factory(),
+            'user_id' => User::factory(),
         ];
     }
 }
