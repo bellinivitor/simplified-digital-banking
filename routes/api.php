@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TransferController;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Support\Facades\Route;
@@ -23,9 +24,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/v1')->group(function () {
 
     Route::post('/login', [LoginController::class, 'login'])->name('login');
-    
 
+    Route::post('transfer/{sender}/{recipient}', [TransferController::class, 'store'])->name('transfer');
 });
 
-Route::get('/test', fn () => 'Ok')
-    ->withoutMiddleware(ThrottleRequests::class . ':api');
+if (config('app.debug')) {
+    Route::get('/test', fn() => 'Ok')
+        ->withoutMiddleware(ThrottleRequests::class . ':api');
+}

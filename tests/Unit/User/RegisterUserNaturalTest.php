@@ -11,8 +11,7 @@ use function Pest\Laravel\assertDatabaseCount;
 test('Create user natural', function () {
 
     User::factory()
-        ->has(Natural::factory()
-            ->for(Identification::factory()))
+        ->has(Natural::factory())
         ->count(3)
         ->create();
 
@@ -25,8 +24,7 @@ test('Create duplicated user natural', function () {
     User::factory()
         ->has(Natural::factory()->state(fn(array $attributes) => [
             'cpf' => '00000000000',
-        ])->for(Identification::factory()))
-        ->count(2)
+        ]))->count(2)
         ->create();
 
 })->group('Unit', 'User')->throws(UniqueConstraintViolationException::class);

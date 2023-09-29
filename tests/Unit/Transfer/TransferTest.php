@@ -12,14 +12,10 @@ use function PHPUnit\Framework\assertEquals;
 test('Validate shopkeeper cannot transfer', function () {
 
     $userShopkeeper = User::factory()
-        ->has(Shopkeeper::factory()
-            ->for(Identification::factory())
-            ->has(Wallet::factory()->withBalance(1000)))
+        ->has(Shopkeeper::factory()->has(Wallet::factory()->withBalance(1000)))
         ->create();
     $userNatural = User::factory()
-        ->has(Natural::factory()
-            ->for(Identification::factory())
-            ->has(Wallet::factory()))
+        ->has(Natural::factory()->has(Wallet::factory()))
         ->create();
 
     $trasnfer = resolve(TransferAction::class);
@@ -32,13 +28,11 @@ test('Validate trasnfer Natural to Shoopkeeper', function () {
 
     $userNatural = User::factory()
         ->has(Natural::factory()
-            ->for(Identification::factory())
             ->has(Wallet::factory()->withBalance(1000)))
         ->create();
     $userShopkeeper = User::factory()
         ->has(Shopkeeper::factory()
-            ->has(Wallet::factory())
-            ->for(Identification::factory()))
+            ->has(Wallet::factory()))
         ->create();
 
     $trasnfer = resolve(TransferAction::class);
@@ -54,8 +48,7 @@ test('Validate trasnfer Natural to Natural', function () {
     $userNatural = User::factory()
         ->has(Natural::factory()
             ->has(Wallet::factory()
-                ->withBalance(1000))
-            ->for(Identification::factory()))
+                ->withBalance(1000)))
         ->create();
     $userOtherNatural = User::factory()
         ->has(Natural::factory()

@@ -24,8 +24,6 @@ class TransferRequest extends FormRequest
     {
         return [
             'amount' => ['required', 'float', 'min:0.01'],
-            'sender' => ['required', 'integer'],
-            'recipient' => ['required', 'integer'],
         ];
     }
 }

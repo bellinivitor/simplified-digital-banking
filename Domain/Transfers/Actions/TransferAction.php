@@ -27,13 +27,12 @@ readonly class TransferAction
      * @param AccountHolderInterface $sender
      * @param AccountHolderInterface $recipient
      * @param float $amount
-     * @param User $user
      * @return float
      * @throws InsufficientBalanceException
      * @throws InvalidTransferValueException
      * @throws NotAllowedToTransferExeption
      */
-    public function __invoke(AccountHolderInterface $sender, AccountHolderInterface $recipient, float $amount, User $user): float
+    public function __invoke(AccountHolderInterface $sender, AccountHolderInterface $recipient, float $amount): float
     {
         if ($sender instanceof Shopkeeper) {
             throw new NotAllowedToTransferExeption('Shopkeepers cannot make transfers');
