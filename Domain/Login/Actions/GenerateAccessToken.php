@@ -20,7 +20,7 @@ readonly class GenerateAccessToken
             throw new AuthenticationException('invalid credentials');
         }
 
-        $expiration = Carbon::now()->addMinutes(config('app.lifetime'));
+        $expiration = Carbon::now()->addMinutes(config('sanctum.expiration'));
         return Auth::user()->createToken(Auth::user()->name, expiresAt: $expiration)->plainTextToken;
     }
 

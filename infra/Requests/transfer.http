@@ -1,0 +1,9 @@
+### Send POST request to transfer
+POST {{route}}/transfer/6/2
+Content-Type: application/json
+Accept: application/json
+Authorization: {{bearer}}
+
+{
+  "amount": 100
+}

@@ -12,7 +12,7 @@ class TransferRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,7 @@ class TransferRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'amount' => ['required', 'float', 'min:0.01'],
+            'amount' => ['required', 'numeric', 'min:0.01'],
         ];
     }
 }

@@ -8,8 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class TransferResource extends JsonResource
 {
 
-    public function toArray(Request $request)
+    public function toArray(Request $request): array
     {
-        return $this->resource;
+        return ["new_balance" => $this->resource];
     }
 }

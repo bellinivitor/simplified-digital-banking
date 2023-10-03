@@ -46,7 +46,7 @@ return [
     |
     */
 
-    'expiration' => null,
+    'expiration' => env('API_SESSION_EXPIRATION', 3600),
 
     /*
     |--------------------------------------------------------------------------

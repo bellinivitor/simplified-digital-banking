@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TesteController;
 use App\Http\Controllers\TransferController;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\ThrottleRequests;
