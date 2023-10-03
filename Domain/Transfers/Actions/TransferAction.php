@@ -3,10 +3,11 @@
 namespace Domain\Transfers\Actions;
 
 use App\Models\Shopkeeper;
-use App\Models\User;
 use Domain\Transfers\Exceptions\InsufficientBalanceException;
 use Domain\Transfers\Exceptions\InvalidTransferValueException;
 use Domain\Transfers\Exceptions\NotAllowedToTransferExeption;
+use Domain\Transfers\Exceptions\UnauthorizedTransfer;
+use Domain\Transfers\ExternalAuthorizationAction;
 use Domain\Users\Interfaces\AccountHolderInterface;
 use Domain\Wallet\Actions\DescountValueOfTransferAction;
 use Domain\Wallet\Actions\ReceiveTransferAction;
@@ -18,7 +19,8 @@ readonly class TransferAction
 {
     public function __construct(
         public ReceiveTransferAction         $receiveTransferAction,
-        public DescountValueOfTransferAction $descountValueOfTransferAction,
+        public DescountValueOfTransferAction $descountValueOfTransfeAction,
+        public ExternalAuthorizationAction   $externalAuthorizationAction,
     )
     {
     }
@@ -28,9 +30,10 @@ readonly class TransferAction
      * @param AccountHolderInterface $recipient
      * @param float $amount
      * @return float
-     * @throws InsufficientBalanceException
      * @throws InvalidTransferValueException
      * @throws NotAllowedToTransferExeption
+     * @throws UnauthorizedTransfer
+     * @throws InsufficientBalanceException
      */
     public function __invoke(AccountHolderInterface $sender, AccountHolderInterface $recipient, float $amount): float
     {
@@ -39,15 +42,16 @@ readonly class TransferAction
         }
 
         if ($amount <= 0) {
-            throw  new InvalidTransferValueException(__('The amount must be greater than zero to make the transfer'));
+            throw new InvalidTransferValueException(__('The amount must be greater than zero to make the transfer'));
         }
 
         try {
             DB::beginTransaction();
 
-            ($this->descountValueOfTransferAction)($sender->getWallet(), $amount);
+            ($this->descountValueOfTransfeAction)($sender->getWallet(), $amount);
             ($this->receiveTransferAction)($recipient->getWallet(), $amount);
 
+            ($this->externalAuthorizationAction)();
             DB::commit();
         } catch (Exception $exception) {
             DB::rollBack();
