@@ -70,3 +70,9 @@ Aqui estão as respostas para a API, proporcionando controle total sobre as resp
 - Laravel 10x
 - Docker
 - Postgres 15x
+
+## Apoie
+
+Se este projeto te ajudou, você pode me pagar um café ☕
+
+<a href="https://buymeacoffee.com/vitorbellini"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" height="40"></a>
